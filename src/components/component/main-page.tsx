@@ -12,10 +12,13 @@ import {
 } from "@/components/ui/sheet";
 import ContactPage from "../contact/contact"
 import { Wave } from "../ui/wave/wave"
+import { GooeyButton } from "../ui/gooeyButton";
+import "../ui/gooeyButton.scss";
 
 export function MainPage() {
   return (
     <div className="flex flex-col min-h-screen ">
+      
       <header className="bg-primary/80 text-primary-foreground py-4 px-6 sticky top-0 z-50  backdrop-blur flex items-center justify-between">
       <div className="container mx-auto flex items-center justify-between">
         <Link
@@ -103,11 +106,25 @@ export function MainPage() {
               Easy GPU vous accompagne dans tous vos projets informatiques, du dépannage à la personnalisation de votre
               PC gamer.
             </p>
+            
             <div className="flex justify-center gap-4">
 
            <Link href="#contact" prefetch={false}>
-              <Button  >
+           
+              <Button id="gooey-button" className="hover:scale-105 ">
                 Contactez-nous
+                <span className="bubbles">
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+      <span className="bubble"></span>
+    </span>
               </Button>
             </Link>
             </div>
@@ -162,6 +179,7 @@ export function MainPage() {
             </div>
           </div>
         </section>
+        
         <section
           id="gallery"
           className="py-16 px-6 md:px-12 bg-gradient-to-r from-[#0072C6] to-[#00A0E3]  text-white scroll-mt-12 "
@@ -276,6 +294,15 @@ export function MainPage() {
           <p className="text-sm">&copy; 2021 Easy GPU. Tous droits réservés.</p>
         </div>
       </footer>
+      <svg xmlns="http://www.w3.org/2000/svg" version="1.1" className="hidden">
+    <defs>
+      <filter id="gooey">
+        <feGaussianBlur in="SourceGraphic" stdDeviation="5" result="blur" />
+        <feColorMatrix in="blur" type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 19 -9" result="highContrastGraphic" />
+        <feComposite in="SourceGraphic" in2="highContrastGraphic" operator="atop" />
+      </filter>
+    </defs>
+  </svg>
     </div>
   )
 }
