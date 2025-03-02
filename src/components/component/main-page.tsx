@@ -14,10 +14,41 @@ import ContactPage from "../contact/contact"
 import { Wave } from "../ui/wave/wave"
 import { GooeyButton } from "../ui/gooeyButton";
 import "../ui/gooeyButton.scss";
+import Head from 'next/head';
 
 export function MainPage() {
   return (
     <div className="flex flex-col min-h-screen ">
+      {/* Schema.org structured data for LocalBusiness */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'LocalBusiness',
+            'name': 'Easy GPU',
+            'description': 'Dépannage informatique et montage de PC gamer sur mesure',
+            'url': 'https://easygpu.fr',
+            'telephone': '07 86 10 94 59',
+            'email': 'contact@easygpu.fr',
+            'address': {
+              '@type': 'PostalAddress',
+              'addressLocality': 'Derval',
+              'postalCode': '44590',
+              'addressCountry': 'FR'
+            },
+            'geo': {
+              '@type': 'GeoCoordinates',
+              'latitude': '47.6917',
+              'longitude': '-1.6682'
+            },
+            'openingHours': 'Mo-Fr 09:00-18:00',
+            'image': '/logo.png',
+            'priceRange': '€€',
+            'servesCuisine': 'Dépannage informatique, Montage PC gamer, Personnalisation',
+          })
+        }}
+      />
       
       <header className="bg-primary/80 text-primary-foreground py-4 px-6 sticky top-0 z-50  backdrop-blur flex items-center justify-between">
       <div className="container mx-auto flex items-center justify-between">
@@ -25,11 +56,12 @@ export function MainPage() {
           href="/"
           className="flex items-center gap-2 text-white  text-lg font-bold"
           prefetch={false}
+          aria-label="Accueil Easy GPU"
         >
-         <img src="/logo.png" width="40" height="40" alt="Logo" />
+         <img src="/logo.png" width="40" height="40" alt="Logo Easy GPU - Service informatique à Derval" />
           <span>Easy GPU</span>
         </Link>
-        <nav className="hidden md:flex items-center gap-6 text-white ">
+        <nav className="hidden md:flex items-center gap-6 text-white " aria-label="Navigation principale">
           <Link href="/" className="hover:underline" prefetch={false}>
             Accueil
           </Link>
@@ -48,9 +80,9 @@ export function MainPage() {
         </nav>
         <Sheet>
             <SheetTrigger asChild>
-              <Button variant="default" className="md:hidden">
+              <Button variant="default" className="md:hidden" aria-label="Menu">
                 <MenuIcon className="h-6 w-6" />
-                <span className="sr-only">Toggle menu</span>
+                <span className="sr-only">Menu de navigation</span>
               </Button>
             </SheetTrigger>
             <SheetContent
@@ -110,8 +142,7 @@ export function MainPage() {
             <div className="flex justify-center gap-4">
 
            <Link href="#contact" prefetch={false}>
-           
-              <Button id="gooey-button" className="hover:scale-105 ">
+              <Button id="gooey-button" className="hover:scale-105 " aria-label="Contactez-nous pour vos projets informatiques">
                 Contactez-nous
                 <span className="bubbles">
       <span className="bubble"></span>
@@ -138,7 +169,7 @@ export function MainPage() {
             <h2 className="text-3xl font-bold mb-8 animate-fade-in-up flex justify-center">Nos services</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in-up  hover:scale-105 transform transition-all duration-300 ">
-                <CpuIcon className="h-12 w-12 text-[#0077b6] mb-4" />
+                <CpuIcon className="h-12 w-12 text-[#0077b6] mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-bold mb-2">Dépannage informatique</h3>
                 <p className="text-gray-700 mb-4">
                   Nous résolvons tous vos problèmes techniques, de la réparation de votre ordinateur à la mise à jour de
@@ -151,7 +182,7 @@ export function MainPage() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in-up  hover:scale-105 transform transition-all duration-300 ">
-                <GamepadIcon className="h-12 w-12 text-[#0077b6] mb-4" />
+                <GamepadIcon className="h-12 w-12 text-[#0077b6] mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-bold mb-2">Montage de PC gamer</h3>
                 <p className="text-gray-700 mb-4">
                   Nous construisons pour vous le PC gamer de vos rêves, avec les meilleures composants pour une
@@ -164,7 +195,7 @@ export function MainPage() {
                 </Link>
               </div>
               <div className="bg-white rounded-lg shadow-lg p-6 animate-fade-in-up  hover:scale-105 transform transition-all duration-300 ">
-                <HeadphonesIcon className="h-12 w-12 text-[#0077b6] mb-4" />
+                <HeadphonesIcon className="h-12 w-12 text-[#0077b6] mb-4" aria-hidden="true" />
                 <h3 className="text-xl font-bold mb-2">Personnalisation</h3>
                 <p className="text-gray-700 mb-4">
                   Nous personnalisons votre PC avec des composants haut de gamme et des designs uniques pour qu&apos;il soit
@@ -192,27 +223,30 @@ export function MainPage() {
                 src="/_1424687a-d024-45d2-bded-85d1efa982fc.jpeg"
                 width={400}
                 height={300}
-                alt="Réalisation 1"
+                alt="PC gamer personnalisé avec éclairage RGB - Réalisation Easy GPU"
                 className="rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                loading="lazy"
               />
               <img
                 src="/_d7474125-fdf7-4c09-929c-eb09304ba3eb.jpeg"
                 width={400}
                 height={300}
-                alt="Réalisation 2"
+                alt="Setup gaming complet avec PC sur mesure - Réalisation Easy GPU"
                 className="rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                loading="lazy"
               />
               <img
                 src="/_ae03acc5-5825-4f2d-98d0-a0c1569f746b.jpeg"
                 width={400}
                 height={300}
-                alt="Réalisation 3"
+                alt="Montage PC gamer haut de gamme avec refroidissement liquide - Réalisation Easy GPU"
                 className="rounded-lg shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                loading="lazy"
               />
             </div>
           </div>
         </section>
-        <section id="contact" className="bg-gray-100 py-16">
+        <section id="contact" className="bg-gray-100 py-16 scroll-mt-12">
           <div className="container mx-auto">
             <h2 className="text-3xl font-bold mb-8 animate-fade-in-up flex justify-center">Contactez-nous</h2>
             <div className="flex flex-col items-center justify-center gap-8 md:flex-row">
@@ -223,15 +257,15 @@ export function MainPage() {
                 <div className="bg-white rounded-lg shadow-lg p-6">
                   <h3 className="text-2xl font-bold mb-4">Nos coordonnées</h3>
                   <div className="flex items-center mb-2">
-                    <MapPinIcon className="h-6 w-6 text-[#0077b6] mr-2" />
+                    <MapPinIcon className="h-6 w-6 text-[#0077b6] mr-2" aria-hidden="true" />
                     <span>44590 Derval</span>
                   </div>
                   <div className="flex items-center mb-2">
-                    <PhoneIcon className="h-6 w-6 text-[#0077b6] mr-2" />
+                    <PhoneIcon className="h-6 w-6 text-[#0077b6] mr-2" aria-hidden="true" />
                     <span>07 86 10 94 59</span>
                   </div>
                   <div className="flex items-center">
-                    <MailIcon className="h-6 w-6 text-[#0077b6] mr-2" />
+                    <MailIcon className="h-6 w-6 text-[#0077b6] mr-2" aria-hidden="true" />
                     <span>contact@easygpu.fr</span>
                   </div>
                 </div>
@@ -239,7 +273,7 @@ export function MainPage() {
             </div>
           </div>
         </section>
-        <section id="faq" className="py-16 px-6 md:px-12  bg-gradient-to-r from-[#0072C6] to-[#00A0E3]">
+        <section id="faq" className="py-16 px-6 md:px-12  bg-gradient-to-r from-[#0072C6] to-[#00A0E3] scroll-mt-12">
           <div className="max-w-4xl mx-auto text-center space-y-6 animate-fadeIn">
             <h2 className="text-3xl md:text-4xl font-bold">FAQ</h2>
             <p className="text-lg md:text-xl text-muted ">
@@ -288,10 +322,10 @@ export function MainPage() {
       <footer className="bg-primary/80   py-6 px-6 md:px-12 text-popover ">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <CpuIcon className="w-6 h-6" />
+            <CpuIcon className="w-6 h-6" aria-hidden="true" />
             <span>Easy GPU</span>
           </div>
-          <p className="text-sm">&copy; 2021 Easy GPU. Tous droits réservés.</p>
+          <p className="text-sm">&copy; {new Date().getFullYear()} Easy GPU. Tous droits réservés.</p>
         </div>
       </footer>
       <svg xmlns="http://www.w3.org/2000/svg" version="1.1" className="hidden">
